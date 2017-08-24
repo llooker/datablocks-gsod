@@ -1,3 +1,8 @@
 connection: "bq-looker-datablocks"
 
-include: "bq.*.explore"
+include: "bq.explore"
+
+# explore: noaa_gsod {
+#   from: bq_gsod
+#   extends: [gsod]
+# }

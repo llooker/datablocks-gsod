@@ -41,6 +41,7 @@ view: bq_gsod {
     type: time
     timeframes: [date, month, month_name, year]
     sql: TIMESTAMP(concat(${TABLE}.year,'-',${month},'-',${day})) ;;
+    convert_tz: no
   }
 
   dimension: dew_point {

@@ -10,7 +10,7 @@ view: sf_gsod {
     hidden: yes
     primary_key: yes
     type: string
-    sql: concat(cast(${station} as string), ${wban}, cast(${weather_date} as string)) ;;
+    sql: (cast(${station} as string) || ${wban}) || (cast(${weather_date} as string)) ;;
   }
 
   dimension: station {
@@ -41,7 +41,7 @@ view: sf_gsod {
   dimension_group: weather {
     type: time
     timeframes: [date, month, month_name, year]
-    sql: TIMESTAMP_FROM_PARTS(${year},${month},${day}) ;;
+    sql: TIMESTAMP_FROM_PARTS(${year},${month},${day},12,0,0) ;;
     convert_tz: no
   }
 

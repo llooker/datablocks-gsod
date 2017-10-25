@@ -41,7 +41,7 @@ view: sf_gsod {
   dimension_group: weather {
     type: time
     timeframes: [date, month, month_name, year]
-    sql: TIMESTAMPFROMPARTS(${year},${month},${day}) ;;
+    sql: TIMESTAMP_FROM_PARTS(${year},${month},${day}) ;;
     convert_tz: no
   }
 

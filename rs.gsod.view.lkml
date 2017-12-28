@@ -28,7 +28,7 @@ view: rs_gsod {
   dimension: windspeed {
     group_label: "Weather Event"
     type: string
-    sql: ${TABLE}.wdsp ;;
+    sql: case when ${TABLE}.wdsp = 999.9 then null else ${TABLE}.wdsp end ;;
   }
 
   dimension: year {
@@ -58,19 +58,19 @@ view: rs_gsod {
   dimension: max_wind_speed {
     group_label: "Weather Event"
     type: string
-    sql: ${TABLE}.mxpsd ;;
+    sql: case when ${TABLE}.mxpsd = 999.9 then null else ${TABLE}.mxpsd end ;;
   }
 
   dimension: gust {
     group_label: "Weather Event"
     type: number
-    sql: ${TABLE}.gust ;;
+    sql: case when ${TABLE}.gust = 999.9 then null else ${TABLE}.gust end ;;
   }
 
   dimension: visibility {
     group_label: "Weather Event"
     type: number
-    sql: ${TABLE}.visib ;;
+    sql: case when ${TABLE}.visib = 999.9 then null else ${TABLE}.visib end ;;
   }
 
   dimension: rainfall {

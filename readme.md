@@ -18,104 +18,123 @@ Note: *Our DDL statments follow Amazon Redshift syntax. You may need to adjust d
 
 ```
 
-CREATE TABLE zcta_distances(
-   zip1        INTEGER  PRIMARY KEY
-  ,zip2        INTEGER
-  ,mi_to_zcta5 NUMERIC(16,13)
-);
+CREATE SCHEMA IF NOT EXISTS gsod;
 
-CREATE table zipcode(
-   zip_code  INTEGER
-  ,latitude  FLOAT
-  ,longitude FLOAT
-  ,city      VARCHAR(50)
-  ,state     VARCHAR(2)
-  ,county    VARCHAR(50)
-);
+CREATE TABLE GSOD.zcta_distances(
+   zip1        VARCHAR  PRIMARY KEY
+  ,zip2        VARCHAR
+  ,mi_to_zcta5 DOUBLE PRECISION
+)
+DISTSTYLE EVEN
+SORTKEY (zip1, zip2);
 
-CREATE table zipcode_station(
-   zip_code                      INTEGER
+CREATE table GSOD.zipcode(
+   zip_code  VARCHAR PRIMARY KEY
+  ,latitude  DOUBLE PRECISION
+  ,longitude DOUBLE PRECISION
+  ,city      VARCHAR
+  ,state     VARCHAR
+  ,county    VARCHAR
+)
+DISTSTYLE ALL
+SORTKEY (zip_code);
+
+CREATE table GSOD.zipcode_station(
+   zip_code                      VARCHAR
   ,year                          INTEGER
-  ,nearest_station_id            INTEGER
-  ,distance_from_nearest_station NUMERIC(13,10)
-);
+  ,nearest_station_id            VARCHAR
+  ,distance_from_nearest_station DOUBLE PRECISION
+)
+DISTKEY (zip_code)
+SORTKEY (zip_code);
 
-CREATE table zcta_county_map(
-   zcta5         varchar(50)
-  ,state         varchar(2)
-  ,county        varchar(3)
-  ,geoid         varchar(5)
-  ,poppt         INTEGER
-  ,hupt          INTEGER
-  ,areapt        INTEGER
-  ,arealandpt    INTEGER
-  ,zpop          INTEGER
-  ,zhu           INTEGER
-  ,zarea         INTEGER
-  ,zarealand     INTEGER
-  ,copop         INTEGER
-  ,cohu          INTEGER
-  ,coarea        INTEGER
-  ,coarealand    INTEGER
-  ,zpoppct       NUMERIC(4,1)
-  ,zhupct        NUMERIC(5,2)
-  ,zareapct      NUMERIC(5,2)
-  ,zarealandpct  NUMERIC(5,2)
-  ,copoppct      NUMERIC(4,2)
-  ,cohupct       NUMERIC(4,2)
-  ,coareapct     NUMERIC(4,2)
-  ,coarealandpct NUMERIC(4,2)
-);
 
-CREATE table stations(
-   usaf    INTEGER
-  ,wban    INTEGER
-  ,name    VARCHAR(30)
-  ,country VARCHAR(2)
-  ,fips VARCHAR(2)
-  ,state   VARCHAR(2)
-  ,call    VARCHAR(30)
-  ,lat     FLOAT
-  ,lon     FLOAT
-  ,elev    NUMERIC(7,1)
-  ,begin   DATETIME
-  ,"end"     DATETIME
-);
+CREATE table GSOD.zcta_county_map(
+   zcta5         VARCHAR
+  ,state         VARCHAR
+  ,county        VARCHAR
+  ,geoid         VARCHAR
+  ,poppt         VARCHAR
+  ,hupt          VARCHAR
+  ,areapt        VARCHAR
+  ,arealandpt    VARCHAR
+  ,zpop          VARCHAR
+  ,zhu          VARCHAR
+  ,zarea         VARCHAR
+  ,zarealand     VARCHAR
+  ,copop         VARCHAR
+  ,cohu          VARCHAR
+  ,coarea        VARCHAR
+  ,coarealand    VARCHAR
+  ,zpoppct       VARCHAR
+  ,zhupct       VARCHAR
+  ,zareapct     VARCHAR
+  ,zarealandpct VARCHAR
+  ,copoppct      VARCHAR
+  ,cohupct      VARCHAR
+  ,coareapct    VARCHAR
+  ,coarealandpct VARCHAR
+)
+DISTKEY (zcta5)
+SORTKEY (zcta5);
 
-CREATE table gsod(
-stn FLOAT,
-wban FLOAT,
-year FLOAT,
-mo FLOAT,
-da FLOAT,
-temp numeric(4,2),
-count_temp FLOAT,
-dewp numeric(4,2),
-count_dewp FLOAT,
-slp numeric(4,2),
-count_slp FLOAT,
-stp numeric(4,2),
-count_stp FLOAT,
-visib numeric(4,2),
-count_visib FLOAT,
-wdsp numeric(4,2),
-count_wdsp FLOAT,
-mxpsd numeric(4,2),
-gust numeric(4,2),
-max numeric(4,2),
-flag_max VARCHAR(50),
-min numeric(4,2),
-flag_min VARCHAR(50),
-prcp numeric(4,2),
-flag_prcp VARCHAR(50),
-sndp numeric(4,2),
-fog FLOAT,
-rain_drizzle FLOAT,
-snow_ice_pellets FLOAT,
-hail FLOAT,
-thunder FLOAT,
-tornado_funnel_cloud FLOAT
-);
+
+
+CREATE table GSOD.stations(
+   usaf    VARCHAR
+  ,wban    VARCHAR
+  ,name    VARCHAR
+  ,country VARCHAR
+  ,state   VARCHAR
+  ,call    VARCHAR
+  ,lat     DOUBLE PRECISION
+  ,lon     DOUBLE PRECISION
+  ,elev    VARCHAR
+  ,"begin"   DATE
+  ,"end"     DATE
+)
+DISTSTYLE ALL
+SORTKEY (state);
+
+
+
+CREATE table GSOD.gsod(
+  stn VARCHAR,
+  wban VARCHAR,
+  year VARCHAR,
+  mo VARCHAR,
+  da VARCHAR,
+  temp DOUBLE PRECISION,
+  count_temp DOUBLE PRECISION,
+  dewp DOUBLE PRECISION,
+  count_dewp DOUBLE PRECISION,
+  slp DOUBLE PRECISION,
+  count_slp DOUBLE PRECISION,
+  stp DOUBLE PRECISION,
+  count_stp DOUBLE PRECISION,
+  visib DOUBLE PRECISION,
+  count_visib DOUBLE PRECISION,
+  wdsp DOUBLE PRECISION,
+  count_wdsp DOUBLE PRECISION,
+  mxpsd DOUBLE PRECISION,
+  gust DOUBLE PRECISION,
+  max DOUBLE PRECISION,
+  flag_max VARCHAR,
+  min VARCHAR,
+  flag_min VARCHAR,
+  prcp VARCHAR,
+  flag_prcp VARCHAR,
+  sndp VARCHAR,
+  fog VARCHAR,
+  rain_drizzle VARCHAR,
+  snow_ice_pellets VARCHAR,
+  hail VARCHAR,
+  thunder VARCHAR,
+  tornado_funnel_cloud VARCHAR
+)
+DISTKEY (stn)
+SORTKEY (year, mo, da);
+
 ```
 
 ### Copy Data from S3

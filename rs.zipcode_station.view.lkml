@@ -1,5 +1,5 @@
 view: rs_zipcode_station {
-  sql_table_name: datablocks_spectrum.zipcode_station ;;
+  sql_table_name: gsod.zipcode_station ;;
 
     dimension: primary_key {
       type: string

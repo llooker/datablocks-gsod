@@ -1,3 +1,3 @@
-connection: "datablocks_spectrum"
+connection: "redshift-datablocks"
 
 include: "rs.explore"

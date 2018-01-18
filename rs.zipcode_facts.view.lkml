@@ -1,5 +1,5 @@
 view: rs_zipcode_facts {
-  sql_table_name: datablocks_spectrum.zipcode ;;
+  sql_table_name: gsod.zipcode ;;
 
   dimension: zipcode {
     primary_key: yes

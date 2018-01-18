@@ -9,7 +9,7 @@ view: rs_zipcode_county {
       SELECT zcta5, rpad(state, 2, '0'), rpad(geoid, 5, '0') as county_code  FROM
       (select *,
         ROW_NUMBER() OVER (PARTITION BY zcta5 ORDER BY ZPOPPCT DESC) row_num
-      from datablocks_spectrum.zcta_county_map)
+      from gsod.zcta_county_map)
       where row_num = 1;;
   }
 

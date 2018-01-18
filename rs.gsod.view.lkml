@@ -1,5 +1,5 @@
 view: rs_gsod {
-  sql_table_name: datablocks_spectrum.gsod ;;
+  sql_table_name: gsod.gsod ;;
 
   dimension: station_id {
     type: string
@@ -64,13 +64,13 @@ view: rs_gsod {
   dimension: gust {
     group_label: "Weather Event"
     type: number
-    sql: ${TABLE}.gust ;;
+    sql: case when ${TABLE}.gust = 999.9 then null else ${TABLE}.gust end;;
   }
 
   dimension: visibility {
     group_label: "Weather Event"
     type: number
-    sql: ${TABLE}.visib ;;
+    sql: case when ${TABLE}.visib = 999.9 then null else ${TABLE}.visib end;;
   }
 
   dimension: rainfall {
@@ -153,7 +153,7 @@ view: rs_gsod {
   dimension: sea_level_pressure {
     group_label: "Weather Event"
     type: number
-    sql: ${TABLE}.slp ;;
+    sql: case when ${TABLE}.slp = 9999.9 then null else ${TABLE}.slp end;;
   }
 
   dimension: snow {
@@ -183,13 +183,13 @@ view: rs_gsod {
 
   measure: min_temperature {
     type: min
-    sql: ${TABLE}.min ;;
+    sql: case when ${TABLE}.min = 9999.9 then null else ${TABLE}.min end ;;
     value_format_name: decimal_2
   }
 
   measure: max_temperature {
     type: max
-    sql: ${TABLE}.max ;;
+    sql: case when ${TABLE}.max = 9999.9 then null else ${TABLE}.max end ;;
     value_format_name: decimal_2
   }
 

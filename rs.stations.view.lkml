@@ -1,5 +1,5 @@
 view: rs_stations {
-  sql_table_name: datablocks_spectrum.stations ;;
+  sql_table_name: gsod.stations ;;
 
   dimension: station_id {
     primary_key: yes

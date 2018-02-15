@@ -33,6 +33,8 @@ view: state_year {
 
 
 ## An ipython notebook can be found here:
+## https://jupyter.looker.com/notebooks/Haarthi's%20Folder/WeatherData.ipynb
+
 view: sql_query_for_zipcode_station {
   derived_table: {
     sql:

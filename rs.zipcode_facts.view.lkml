@@ -6,7 +6,7 @@ view: rs_zipcode_facts {
     hidden: yes
     map_layer_name: us_zipcode_tabulation_areas
     type: zipcode
-    sql: RPAD(${TABLE}.zip_code::varchar), 5, '0') ;;
+    sql: RPAD(${TABLE}.zip_code::varchar, 5, '0') ;;
   }
 
   dimension: latitude {

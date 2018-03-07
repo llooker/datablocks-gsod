@@ -10,7 +10,7 @@ view: rs_gsod {
     hidden: yes
     primary_key: yes
     type: string
-    sql: cast(${station} as string) ||  ${wban} || cast(${weather_date} as string) ;;
+    sql: cast(${station} as varchar) ||  ${wban} || cast(${weather_date} as varchar) ;;
   }
 
   dimension: station {

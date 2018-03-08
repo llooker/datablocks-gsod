@@ -1,3 +1,3 @@
 connection: "redshift-datablocks"
 
-include: "rs.explore"
+include: "redshift.explore"

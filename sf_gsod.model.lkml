@@ -1,3 +1,3 @@
 connection: "snowflake-datablocks"
 
-include: "sf.explore"
+include: "snowflake.explore"

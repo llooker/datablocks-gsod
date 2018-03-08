@@ -1,3 +1,3 @@
 connection: "bq-looker-datablocks"
 
-include: "bq.explore"
+include: "bigquery.explore"

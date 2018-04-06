@@ -6,13 +6,12 @@
 
 view: state_year {
   derived_table: {
-    sql_trigger_value: select count(*) ;;
     sql:
       SELECT distinct year, state
               FROM `bigquery-public-data.noaa_gsod.gsod*`
               CROSS JOIN (
               select state
-                from `lookerdata.weather.zipcode`
+                from `looker-datablocks.weather.zipcode`
                 group by 1
               )
                ;;

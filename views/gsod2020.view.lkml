@@ -127,6 +127,11 @@ view: gsod2020 {
     sql: ${TABLE}.stp ;;
   }
 
+  dimension: pk {
+    sql: CONCAT(${year},${da},${mo},${stn}) ;;
+    primary_key: yes
+  }
+
   measure: temp {
     type: average
     sql: ${TABLE}.temp ;;

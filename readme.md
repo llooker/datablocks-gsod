@@ -166,6 +166,7 @@ FROM 's3://looker-datablocks/gsod/stations/'
 CREDENTIALS 'aws_access_key_id=<aws_access_key_id>;aws_secret_access_key=<aws_secret_access_key>'  -- replace with access key and secret key from step 1
 REGION 'us-east-1'
 IGNOREHEADER as 1
+DATEFORMAT AS 'YYYYMMDD'
 CSV;
 
 COPY gsod
